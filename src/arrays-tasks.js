@@ -338,8 +338,12 @@ function calculateBalance(/* arr */) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  if (chunkSize <= 0) throw new Error('Chunk size must be a positive integer');
+  return arr.reduce((acc, _, i) => {
+    if (i % chunkSize === 0) acc.push(arr.slice(i, i + chunkSize));
+    return acc;
+  }, []);
 }
 
 /**
@@ -460,8 +464,10 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  if (arr.length === 0) return [];
+  const sortArr = arr.toSorted((a, b) => b - a);
+  return sortArr.slice(0, n);
 }
 
 /**
